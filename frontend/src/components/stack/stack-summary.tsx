@@ -62,7 +62,7 @@ export function StackSummary({ allProducts = products }: { allProducts?: Product
       className={`stack-section ${isSticky ? 'is-sticky' : ''}`}
       aria-label="Your selected SaaS subscription stack"
     >
-      <div className="stack-summary-card">
+      <div className={`stack-summary-card ${isExpanded ? 'is-expanded' : 'is-collapsed'}`}>
         {/* Left: Summary Count */}
         <div className="stack-intro">
           <h2>Your stack</h2>
@@ -74,7 +74,7 @@ export function StackSummary({ allProducts = products }: { allProducts?: Product
         </div>
 
         {/* Middle: Horizontal Selected Items */}
-        <div className="stack-items-track">
+        <div className={`stack-items-track ${isExpanded ? 'flex' : 'hidden md:flex'}`}>
           {selected.length > 0 ? (
             selected.map(({ product, plan }) => (
               <div className="stack-item-node" key={product.id}>
@@ -118,11 +118,12 @@ export function StackSummary({ allProducts = products }: { allProducts?: Product
             {selected.length > 0 && (
               <button
                 type="button"
-                className="theme-toggle-pill !w-7 !h-7 ml-auto inline-flex md:hidden"
+                className="theme-toggle-pill !w-8 !h-8 ml-auto inline-flex md:hidden items-center justify-center"
                 onClick={() => setIsExpanded(!isExpanded)}
-                aria-label="Toggle stack details"
+                aria-label={isExpanded ? "Collapse stack items" : "Expand stack items"}
+                title={isExpanded ? "Collapse stack items" : "Expand stack items"}
               >
-                {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+                {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
               </button>
             )}
           </div>

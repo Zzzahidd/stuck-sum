@@ -93,21 +93,24 @@ export function Header() {
             className="nav-link"
             activeProps={{ className: 'nav-link active' }}
           >
-            Calculator
+            <span className="hidden xs:inline sm:inline">Calculator</span>
+            <span className="xs:hidden sm:hidden">Stack</span>
           </Link>
           <Link
             to="/models"
             className="nav-link"
             activeProps={{ className: 'nav-link active' }}
           >
-            AI Models
+            <span className="hidden xs:inline sm:inline">AI Models</span>
+            <span className="xs:hidden sm:hidden">Models</span>
           </Link>
           <Link
             to="/news"
             className="nav-link"
             activeProps={{ className: 'nav-link active' }}
           >
-            Tech News
+            <span className="hidden xs:inline sm:inline">Tech News</span>
+            <span className="xs:hidden sm:hidden">News</span>
           </Link>
           <button
             type="button"

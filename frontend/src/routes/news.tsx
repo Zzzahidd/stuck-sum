@@ -46,21 +46,21 @@ export function NewsPage() {
   })
 
   return (
-    <main className="max-w-[1400px] mx-auto px-8 py-12">
+    <main className="max-w-[1400px] mx-auto px-4 sm:px-8 py-6 sm:py-12">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-10">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 mb-8 sm:mb-10">
         <div>
-          <h1 className="text-4xl font-bold tracking-tight text-[var(--color-text-primary)]">
+          <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-[var(--color-text-primary)]">
             Tech News & Model Releases
           </h1>
-          <p className="text-lg text-[var(--color-text-secondary)] mt-2">
+          <p className="text-sm sm:text-lg text-[var(--color-text-secondary)] mt-1.5 sm:mt-2">
             Real-time updates, releases, and discussions across AI models, developer tools, and SaaS ecosystems.
           </p>
         </div>
 
         <button
           type="button"
-          className="btn-secondary !w-auto !px-4 !h-10 text-sm"
+          className="btn-secondary !w-auto !px-4 !h-10 text-sm flex-shrink-0"
           onClick={loadNews}
           disabled={loading}
         >
@@ -70,31 +70,31 @@ export function NewsPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 pb-6 border-b border-[var(--color-border-default)] mb-8 overflow-x-auto scrollbar-none">
+      <div className="flex items-center gap-2 pb-4 sm:pb-6 border-b border-[var(--color-border-default)] mb-6 sm:mb-8 overflow-x-auto scrollbar-none">
         <button
           type="button"
-          className={`filter-pill ${activeTab === 'all' ? 'active' : ''}`}
+          className={`filter-pill whitespace-nowrap ${activeTab === 'all' ? 'active' : ''}`}
           onClick={() => setActiveTab('all')}
         >
           All Updates
         </button>
         <button
           type="button"
-          className={`filter-pill ${activeTab === 'ai' ? 'active' : ''}`}
+          className={`filter-pill whitespace-nowrap ${activeTab === 'ai' ? 'active' : ''}`}
           onClick={() => setActiveTab('ai')}
         >
           AI & LLM News
         </button>
         <button
           type="button"
-          className={`filter-pill ${activeTab === 'devtools' ? 'active' : ''}`}
+          className={`filter-pill whitespace-nowrap ${activeTab === 'devtools' ? 'active' : ''}`}
           onClick={() => setActiveTab('devtools')}
         >
           SaaS & Dev Tools
         </button>
         <button
           type="button"
-          className={`filter-pill ${activeTab === 'hackernews' ? 'active' : ''}`}
+          className={`filter-pill whitespace-nowrap ${activeTab === 'hackernews' ? 'active' : ''}`}
           onClick={() => setActiveTab('hackernews')}
         >
           Hacker News Top
@@ -103,16 +103,16 @@ export function NewsPage() {
 
       {/* Articles Grid */}
       {loading ? (
-        <div className="py-24 text-center">
+        <div className="py-16 sm:py-24 text-center">
           <RefreshCw size={32} className="mx-auto text-[var(--color-brand-primary)] animate-spin mb-4" />
           <p className="text-[var(--color-text-secondary)]">Fetching latest stories from Hacker News & Dev.to...</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredNews.map((article) => (
             <article
               key={article.id}
-              className="p-6 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-surface-card)] hover:border-[var(--color-border-strong)] transition-all flex flex-col justify-between"
+              className="p-4 sm:p-6 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-surface-card)] hover:border-[var(--color-border-strong)] transition-all flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">

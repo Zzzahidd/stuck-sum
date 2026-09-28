@@ -92,11 +92,11 @@ export function StackApp() {
         {/* Hero Section */}
         <section className="hero" aria-label="Introduction">
           <h1>
-            Build your SaaS stack see<br />
-            the real cost
+            Build your SaaS stack <br className="hidden sm:inline" />
+            see the real cost
           </h1>
           <p>
-            Browse 500+ popular tools, add the ones you use, and get your and yearly cost instantly.
+            Browse 500+ popular tools, add the ones you use, and get your monthly and yearly cost instantly.
           </p>
         </section>
 

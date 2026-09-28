@@ -64,9 +64,9 @@ function ProductDetailPage() {
   }
 
   return (
-    <main className="max-w-[1200px] mx-auto px-8 py-10">
+    <main className="max-w-[1200px] mx-auto px-4 sm:px-8 py-6 sm:py-10">
       {/* Breadcrumb / Back button */}
-      <div className="mb-6">
+      <div className="mb-4 sm:mb-6">
         <Link
           to="/"
           className="inline-flex items-center gap-2 text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
@@ -76,31 +76,31 @@ function ProductDetailPage() {
       </div>
 
       {/* Product Header Card */}
-      <div className="p-8 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-surface-card)] mb-10">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-6 border-b border-[var(--color-border-subtle)]">
-          <div className="flex items-center gap-5">
-            <div className="w-20 h-20 rounded-xl bg-[var(--color-surface-card)] border border-[var(--color-border-subtle)] p-3 flex items-center justify-center overflow-hidden">
-              <BrandLogo slug={product.slug || product.id} name={product.name} size={54} />
+      <div className="p-4 sm:p-8 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-surface-card)] mb-8 sm:mb-10">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 sm:gap-6 pb-6 border-b border-[var(--color-border-subtle)]">
+          <div className="flex items-center gap-3.5 sm:gap-5">
+            <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl bg-[var(--color-surface-card)] border border-[var(--color-border-subtle)] p-2 sm:p-3 flex items-center justify-center overflow-hidden flex-shrink-0">
+              <BrandLogo slug={product.slug || product.id} name={product.name} size={48} />
             </div>
             <div>
-              <div className="flex items-center gap-3">
-                <h1 className="text-3xl font-bold text-[var(--color-text-primary)]">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                <h1 className="text-2xl sm:text-3xl font-bold text-[var(--color-text-primary)]">
                   {product.name}
                 </h1>
                 <span className="category-badge">{product.category}</span>
               </div>
-              <p className="text-[var(--color-text-secondary)] mt-1 font-medium">
+              <p className="text-sm sm:text-base text-[var(--color-text-secondary)] mt-0.5 sm:mt-1 font-medium">
                 by {product.companyName}
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-3 w-full lg:w-auto pt-2 lg:pt-0">
             <a
               href={product.websiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary !w-auto !px-4 !h-10 text-sm"
+              className="btn-secondary !w-full sm:!w-auto !px-4 !h-10 text-sm"
             >
               Official Website <ExternalLink size={14} />
             </a>
@@ -108,22 +108,22 @@ function ProductDetailPage() {
               href={product.pricingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary !w-auto !px-4 !h-10 text-sm"
+              className="btn-secondary !w-full sm:!w-auto !px-4 !h-10 text-sm"
             >
               Pricing Page <ExternalLink size={14} />
             </a>
           </div>
         </div>
 
-        <div className="pt-6">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-2">
+        <div className="pt-4 sm:pt-6">
+          <h2 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] mb-1.5 sm:mb-2">
             Overview
           </h2>
-          <p className="text-lg text-[var(--color-text-secondary)] leading-relaxed">
+          <p className="text-sm sm:text-lg text-[var(--color-text-secondary)] leading-relaxed">
             {product.description}
           </p>
 
-          <div className="flex flex-wrap items-center gap-6 mt-6 pt-6 border-t border-[var(--color-border-subtle)] text-xs text-[var(--color-text-muted)]">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-6 mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-[var(--color-border-subtle)] text-xs text-[var(--color-text-muted)]">
             <span className="flex items-center gap-1.5">
               <ShieldCheck size={16} className="text-[var(--color-brand-primary)]" />
               Verified source: {product.source}
@@ -139,17 +139,17 @@ function ProductDetailPage() {
       </div>
 
       {/* Pricing Tiers Matrix */}
-      <h2 className="text-2xl font-bold text-[var(--color-text-primary)] mb-6">
+      <h2 className="text-xl sm:text-2xl font-bold text-[var(--color-text-primary)] mb-4 sm:mb-6">
         Available Pricing Plans
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16">
         {product.plans.map((p) => {
           const isSelected = selectedStackItem?.planId === p.id
           return (
             <div
               key={p.id}
-              className={`p-6 rounded-xl border flex flex-col justify-between transition-all ${
+              className={`p-4 sm:p-6 rounded-xl border flex flex-col justify-between transition-all ${
                 isSelected
                   ? 'border-[var(--color-brand-primary)] bg-[var(--color-surface-stack)] shadow-md ring-1 ring-[var(--color-brand-primary)]'
                   : 'border-[var(--color-border-default)] bg-[var(--color-surface-card)]'

@@ -67,25 +67,25 @@ export function ModelsPage() {
   }
 
   return (
-    <main className="max-w-[1600px] mx-auto px-8 py-12">
+    <main className="max-w-[1600px] mx-auto px-4 sm:px-8 py-6 sm:py-12">
       {/* Hero Header */}
-      <div className="max-w-[800px] mb-10">
-        <h1 className="text-4xl font-bold tracking-tight text-[var(--color-text-primary)]">
+      <div className="max-w-[800px] mb-8 sm:mb-10">
+        <h1 className="text-2xl sm:text-4xl font-bold tracking-tight text-[var(--color-text-primary)]">
           AI Models & Token Pricing Matrix
         </h1>
-        <p className="text-lg text-[var(--color-text-secondary)] mt-3 leading-relaxed">
+        <p className="text-sm sm:text-lg text-[var(--color-text-secondary)] mt-2 sm:mt-3 leading-relaxed">
           Explore over 280+ active frontier and open-weight models. Compare token rates, context windows, and add developer API subscriptions directly to your stack.
         </p>
       </div>
 
       {/* Search & Provider Filter Bar */}
-      <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4 mb-8">
+      <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
         <div className="search-field flex-1">
           <Search size={18} />
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search AI models by name, provider, or architecture (e.g. Claude, Llama, DeepSeek)..."
+            placeholder="Search AI models by name or provider..."
           />
         </div>
 
@@ -105,14 +105,14 @@ export function ModelsPage() {
 
       {/* Models Table / Grid */}
       {loading ? (
-        <div className="py-24 text-center">
+        <div className="py-16 sm:py-24 text-center">
           <Cpu size={36} className="mx-auto text-[var(--color-brand-primary)] animate-pulse mb-4" />
           <p className="text-[var(--color-text-secondary)] font-medium">
             Fetching latest models and live token rates from OpenRouter...
           </p>
         </div>
       ) : filteredModels.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredModels.map((m) => {
             const promptPrice = parseFloat(String(m.pricing?.prompt || '0')) * 1000000
             const completionPrice = parseFloat(String(m.pricing?.completion || '0')) * 1000000
@@ -123,7 +123,7 @@ export function ModelsPage() {
             return (
               <div
                 key={m.id}
-                className={`p-6 rounded-xl border flex flex-col justify-between transition-all ${
+                className={`p-4 sm:p-6 rounded-xl border flex flex-col justify-between transition-all ${
                   isAdded
                     ? 'border-[var(--color-brand-primary)] bg-[var(--color-surface-stack)]'
                     : 'border-[var(--color-border-default)] bg-[var(--color-surface-card)] hover:border-[var(--color-border-strong)]'
