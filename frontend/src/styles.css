@@ -99,13 +99,22 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   width: 100%;
+  max-width: 100%;
+  touch-action: pan-y;
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior-x: none;
 }
 
 body {
   margin: 0;
-  min-width: 320px;
+  padding: 0;
   width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
+  position: relative;
+  touch-action: pan-y;
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior-x: none;
   background-color: var(--color-background-canvas);
   color: var(--color-text-primary);
   font-family: var(--font-family-primary);
@@ -394,32 +403,43 @@ main {
 
 /* Stack Summary Card */
 .stack-section {
-  position: sticky;
-  top: 16px;
-  z-index: 30;
-  margin: 36px 0 28px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0 0 16px;
 }
 
 .stack-summary-card {
-  position: relative;
-  display: grid;
-  grid-template-columns: 200px minmax(0, 1fr) 220px;
-  align-items: center;
-  min-height: 120px;
-  padding: 20px 24px;
-  border: 1px solid var(--color-border-default);
-  border-radius: 14px;
-  background-color: var(--color-surface-stack);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  display: none !important;
 }
 
-.stack-section.is-sticky .stack-summary-card,
-.stack-is-sticky .stack-summary-card {
-  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.1), 0 4px 12px -2px rgba(0, 0, 0, 0.05);
-  border-color: var(--color-border-strong);
-  background-color: var(--color-surface-stack);
+@media (min-width: 768px) {
+  .stack-section {
+    position: sticky;
+    top: 16px;
+    z-index: 30;
+    margin: 36px 0 28px;
+  }
+  .stack-summary-card {
+    position: relative;
+    display: grid !important;
+    grid-template-columns: 200px minmax(0, 1fr) 220px;
+    align-items: center;
+    min-height: 120px;
+    padding: 20px 24px;
+    border: 1px solid var(--color-border-default);
+    border-radius: 14px;
+    background-color: var(--color-surface-stack);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .stack-section.is-sticky .stack-summary-card,
+  .stack-is-sticky .stack-summary-card {
+    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.1), 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+    border-color: var(--color-border-strong);
+    background-color: var(--color-surface-stack);
+  }
 }
 
 .stack-intro h2 {
@@ -936,11 +956,21 @@ footer {
 
 /* Mobile Stack Inline Card & Floating Dock Styling */
 .mobile-stack-inline-card {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   padding: 12px 14px;
   border: 1px solid var(--color-border-default);
   border-radius: 12px;
   background-color: var(--color-surface-stack);
   margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .mobile-stack-inline-card {
+    display: none !important;
+  }
 }
 
 .mobile-floating-dock {
@@ -967,9 +997,15 @@ footer {
 @media (max-width: 768px) {
   .site-header {
     height: 58px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   .header-container {
     padding: 0 14px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   .brand-logo-img {
     height: 26px;
@@ -990,10 +1026,15 @@ footer {
   main {
     padding: 14px 14px 96px;
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     overflow-x: hidden;
   }
   .hero {
     margin: 8px 0 18px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   .hero h1 {
     font-size: clamp(22px, 6.4vw, 30px);
@@ -1006,29 +1047,36 @@ footer {
     margin-top: 6px;
   }
   .discovery {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   .search-field {
     height: 48px;
     padding: 0 14px;
     border-radius: 10px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   .search-field input {
     font-size: 16px; /* Prevents auto-zoom in iOS Safari */
     padding: 0 8px;
+    width: 100%;
+    min-width: 0;
   }
   .filters-wrapper {
     gap: 6px;
-    padding-top: 8px;
-    padding-bottom: 4px;
-    margin: 0 -14px;
-    padding-left: 14px;
-    padding-right: 14px;
+    padding: 6px 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     flex-wrap: nowrap;
-    max-width: 100vw;
   }
   .filters-wrapper::-webkit-scrollbar {
     display: none;
@@ -1047,23 +1095,43 @@ footer {
     z-index: 50;
   }
   .stack-section {
-    position: static;
-    margin: 0 0 16px;
+    position: static !important;
+    margin: 0 0 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .stack-summary-card {
+    display: none !important;
   }
   .catalog-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
     margin-bottom: 14px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   .product-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
     gap: 12px;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
   .product-card {
     min-height: auto;
     padding: 14px;
     border-radius: 12px;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden;
+  }
+  .product-card-top {
+    width: 100%;
+    box-sizing: border-box;
   }
   .product-logo-box {
     width: 42px;
@@ -1099,9 +1167,14 @@ footer {
   .btn-secondary, .btn-primary {
     height: 44px;
     font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
   }
   footer {
     padding: 20px 14px max(24px, env(safe-area-inset-bottom));
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 }
 

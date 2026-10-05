@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
@@ -12,7 +13,7 @@ export const Route = createRootRoute({
       },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1, viewport-fit=cover',
+        content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover',
       },
       {
         title: 'SaaS Stack Cost Calculator | StackSum',
@@ -43,6 +44,28 @@ export const Route = createRootRoute({
 })
 
 function RootComponent() {
+  useEffect(() => {
+    // Prevent pinch-to-zoom and multi-touch gestures on mobile
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches && e.touches.length > 1) {
+        e.preventDefault()
+      }
+    }
+    const handleGesture = (e: Event) => {
+      e.preventDefault()
+    }
+
+    document.addEventListener('touchmove', handleTouchMove, { passive: false })
+    document.addEventListener('gesturestart', handleGesture)
+    document.addEventListener('gesturechange', handleGesture)
+
+    return () => {
+      document.removeEventListener('touchmove', handleTouchMove)
+      document.removeEventListener('gesturestart', handleGesture)
+      document.removeEventListener('gesturechange', handleGesture)
+    }
+  }, [])
+
   return (
     <html lang="en">
       <head>
