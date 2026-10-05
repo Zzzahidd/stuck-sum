@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useState, useEffect, useMemo } from 'react'
-import { Search, Plus, Check, ExternalLink, Cpu } from 'lucide-react'
+import { Search, Plus, Check, ExternalLink, Cpu, CircleX } from 'lucide-react'
 import { fetchOpenRouterModels } from '../lib/api-client'
 import type { OpenRouterModel } from '../lib/api-client'
 import { convertOpenRouterModelToProduct } from '../data/products'
@@ -66,6 +66,11 @@ export function ModelsPage() {
     }
   }
 
+  const handleClearFilters = () => {
+    setQuery('')
+    setProviderFilter('All')
+  }
+
   return (
     <main className="max-w-[1600px] mx-auto px-4 sm:px-8 py-6 sm:py-12">
       {/* Hero Header */}
@@ -79,31 +84,60 @@ export function ModelsPage() {
       </div>
 
       {/* Search & Provider Filter Bar */}
-      <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
-        <label className="search-field flex-1" htmlFor="model-search-input">
-          <Search size={18} aria-hidden="true" />
+      <div className="discovery mb-6 sm:mb-8" aria-label="Search and filter AI models">
+        <label className="search-field" htmlFor="model-search-input">
+          <Search size={20} aria-hidden="true" />
           <input
             id="model-search-input"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search AI models by name or provider..."
+            placeholder="Search AI models by name, provider (e.g. OpenAI, Anthropic, DeepSeek)..."
             autoComplete="off"
             spellCheck={false}
           />
+          <button
+            type="button"
+            className={`clear-search ${query ? 'visible' : ''}`}
+            onClick={() => setQuery('')}
+            aria-label="Clear search input"
+          >
+            <CircleX size={18} />
+          </button>
         </label>
 
-        <div className="flex items-center gap-2 overflow-x-auto py-1 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none touch-pan-x">
-          {providers.slice(0, 12).map((prov) => (
-            <button
-              key={prov}
-              type="button"
-              className={`filter-pill whitespace-nowrap capitalize flex-shrink-0 ${providerFilter === prov ? 'active' : ''}`}
-              onClick={() => setProviderFilter(prov)}
-            >
-              {prov}
-            </button>
-          ))}
+        {/* Provider Filter Horizontal Scroller */}
+        <div className="flex items-center gap-2 overflow-x-auto py-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-none touch-pan-x mt-3">
+          {providers.map((prov) => {
+            const isActive = providerFilter === prov
+            return (
+              <button
+                key={prov}
+                type="button"
+                className={`filter-pill whitespace-nowrap capitalize flex-shrink-0 ${isActive ? 'active' : ''}`}
+                onClick={() => setProviderFilter(prov)}
+                aria-pressed={isActive}
+              >
+                {prov}
+              </button>
+            )
+          })}
         </div>
+      </div>
+
+      {/* Count and Active Filter Status */}
+      <div className="flex items-center justify-between mb-4">
+        <p className="text-sm text-[var(--color-text-secondary)] font-medium">
+          {loading ? 'Loading models...' : `${filteredModels.length} models available`}
+        </p>
+        {(query || providerFilter !== 'All') && (
+          <button
+            type="button"
+            className="text-sm font-medium text-[var(--color-brand-primary)] hover:underline"
+            onClick={handleClearFilters}
+          >
+            Reset filters
+          </button>
+        )}
       </div>
 
       {/* Models Table / Grid */}
