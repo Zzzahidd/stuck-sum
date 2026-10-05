@@ -23,6 +23,7 @@ type StackState = {
   hydrate: () => void
   selectPlan: (item: SelectedStackItem) => void
   remove: (productId: string) => void
+  clear: () => void
 }
 
 export const useStackStore = create<StackState>((set) => ({
@@ -40,5 +41,10 @@ export const useStackStore = create<StackState>((set) => ({
       const next = state.items.filter((item) => item.productId !== productId)
       persist(next)
       return { items: next }
+    }),
+  clear: () =>
+    set(() => {
+      persist([])
+      return { items: [] }
     }),
 }))

@@ -80,21 +80,24 @@ export function ModelsPage() {
 
       {/* Search & Provider Filter Bar */}
       <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
-        <div className="search-field flex-1">
-          <Search size={18} />
+        <label className="search-field flex-1" htmlFor="model-search-input">
+          <Search size={18} aria-hidden="true" />
           <input
+            id="model-search-input"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search AI models by name or provider..."
+            autoComplete="off"
+            spellCheck={false}
           />
-        </div>
+        </label>
 
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
-          {providers.slice(0, 8).map((prov) => (
+        <div className="flex items-center gap-2 overflow-x-auto py-1 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-none touch-pan-x">
+          {providers.slice(0, 12).map((prov) => (
             <button
               key={prov}
               type="button"
-              className={`filter-pill whitespace-nowrap capitalize ${providerFilter === prov ? 'active' : ''}`}
+              className={`filter-pill whitespace-nowrap capitalize flex-shrink-0 ${providerFilter === prov ? 'active' : ''}`}
               onClick={() => setProviderFilter(prov)}
             >
               {prov}

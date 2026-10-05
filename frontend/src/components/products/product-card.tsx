@@ -93,25 +93,26 @@ export function ProductCard({ product }: { product: Product }) {
       className={`product-card ${existingStackItem ? 'in-stack' : ''}`}
       id={`product-${product.id}`}
     >
-      {/* Top Bar: Initial Badge + Link */}
+      {/* Top Header: Logo + Title/Badge + Arrow Link */}
       <div className="product-card-top">
-        <div className="product-logo-box">
-          <BrandLogo slug={product.slug || product.id} name={product.name} size={44} />
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="product-logo-box">
+            <BrandLogo slug={product.slug || product.id} name={product.name} size={40} />
+          </div>
+          <div className="product-header-info min-w-0">
+            <h3 className="product-title truncate">{product.name}</h3>
+            <span className="category-badge">{product.category}</span>
+          </div>
         </div>
         <Link
           to="/products/$slug"
           params={{ slug: product.slug }}
-          className="product-arrow-btn"
+          className="product-arrow-btn flex-shrink-0"
           aria-label={`View full details for ${product.name}`}
           title="View product details"
         >
           <ArrowRight size={18} />
         </Link>
-      </div>
-
-      <div className="product-header-info">
-        <h3 className="product-title">{product.name}</h3>
-        <span className="category-badge">{product.category}</span>
       </div>
 
       <p className="product-desc">{product.description}</p>

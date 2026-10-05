@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 export interface BrandLogoProps {
   slug?: string
   name: string
@@ -26,14 +28,84 @@ const getGradient = (str: string) => {
   return `linear-gradient(135deg, ${pair[0]}, ${pair[1]})`
 }
 
+// Known SimpleIcon slugs
+const SIMPLE_ICON_MAP: Record<string, string> = {
+  chatgpt: 'openai',
+  openai: 'openai',
+  claude: 'anthropic',
+  anthropic: 'anthropic',
+  gemini: 'googlegemini',
+  perplexity: 'perplexity',
+  cursor: 'cursor',
+  github: 'github',
+  vercel: 'vercel',
+  figma: 'figma',
+  notion: 'notion',
+  slack: 'slack',
+  spotify: 'spotify',
+  linear: 'linear',
+  canva: 'canva',
+  framer: 'framer',
+  adobe: 'adobe',
+  dropbox: 'dropbox',
+  grammarly: 'grammarly',
+  zoom: 'zoom',
+  loom: 'loom',
+  mailchimp: 'mailchimp',
+  hubspot: 'hubspot',
+  stripe: 'stripe',
+  wise: 'wise',
+  supabase: 'supabase',
+  neon: 'neon',
+  postman: 'postman',
+  datadog: 'datadog',
+  sentry: 'sentry',
+  cloudflare: 'cloudflare',
+  '1password': '1password',
+  midjourney: 'midjourney',
+  elevenlabs: 'elevenlabs',
+  deepseek: 'deepseek',
+  posthog: 'posthog',
+  airtable: 'airtable',
+  zapier: 'zapier',
+  resend: 'resend',
+  docker: 'docker',
+  raycast: 'raycast',
+}
+
 /**
- * Renders an initial badge using the first letter of the company/tool name with an elegant gradient
+ * Renders an official brand icon with graceful fallback to an initial badge
  */
-export function BrandLogo({ name, className = '', size = 44 }: BrandLogoProps) {
-  // Strip common provider prefixes like "OpenAI: ", "Google: ", "Anthropic: " if needed
+export function BrandLogo({ slug = '', name, className = '', size = 44 }: BrandLogoProps) {
+  const [imgError, setImgError] = useState(false)
+  const normalizedKey = (slug || name).toLowerCase().replace(/[^a-z0-9]/g, '')
+  const iconSlug = SIMPLE_ICON_MAP[slug?.toLowerCase()] || SIMPLE_ICON_MAP[normalizedKey]
+
   const cleanedName = (name || '').replace(/^(OpenAI|Google|Meta|Anthropic|Microsoft):\s*/i, '').trim()
   const initial = cleanedName.charAt(0).toUpperCase() || 'A'
-  const fontSize = Math.max(12, Math.round(size * 0.45))
+  const fontSize = Math.max(12, Math.round(size * 0.44))
+
+  if (iconSlug && !imgError) {
+    const iconSize = Math.max(16, Math.round(size * 0.65))
+    return (
+      <div
+        style={{ width: size, height: size }}
+        className={`rounded-lg flex items-center justify-center bg-[var(--color-surface-card)] border border-[var(--color-border-subtle)] flex-shrink-0 overflow-hidden shadow-xs ${className}`}
+        title={name}
+      >
+        <img
+          src={`https://cdn.simpleicons.org/${iconSlug}`}
+          alt={`${name} icon`}
+          width={iconSize}
+          height={iconSize}
+          className="object-contain dark:brightness-110"
+          style={{ maxWidth: `${iconSize}px`, maxHeight: `${iconSize}px` }}
+          loading="lazy"
+          onError={() => setImgError(true)}
+        />
+      </div>
+    )
+  }
 
   return (
     <div
@@ -43,7 +115,7 @@ export function BrandLogo({ name, className = '', size = 44 }: BrandLogoProps) {
         background: getGradient(name || 'default'),
         fontSize: `${fontSize}px`,
       }}
-      className={`rounded-lg flex items-center justify-center text-white font-bold shadow-sm select-none flex-shrink-0 ${className}`}
+      className={`rounded-lg flex items-center justify-center text-white font-bold shadow-xs select-none flex-shrink-0 ${className}`}
       aria-label={`${name} initial`}
     >
       {initial}

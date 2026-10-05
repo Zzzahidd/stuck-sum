@@ -70,31 +70,31 @@ export function NewsPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 pb-4 sm:pb-6 border-b border-[var(--color-border-default)] mb-6 sm:mb-8 overflow-x-auto scrollbar-none">
+      <div className="flex items-center gap-2 pb-3 sm:pb-6 border-b border-[var(--color-border-default)] mb-6 sm:mb-8 overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-none touch-pan-x">
         <button
           type="button"
-          className={`filter-pill whitespace-nowrap ${activeTab === 'all' ? 'active' : ''}`}
+          className={`filter-pill whitespace-nowrap flex-shrink-0 ${activeTab === 'all' ? 'active' : ''}`}
           onClick={() => setActiveTab('all')}
         >
           All Updates
         </button>
         <button
           type="button"
-          className={`filter-pill whitespace-nowrap ${activeTab === 'ai' ? 'active' : ''}`}
+          className={`filter-pill whitespace-nowrap flex-shrink-0 ${activeTab === 'ai' ? 'active' : ''}`}
           onClick={() => setActiveTab('ai')}
         >
           AI & LLM News
         </button>
         <button
           type="button"
-          className={`filter-pill whitespace-nowrap ${activeTab === 'devtools' ? 'active' : ''}`}
+          className={`filter-pill whitespace-nowrap flex-shrink-0 ${activeTab === 'devtools' ? 'active' : ''}`}
           onClick={() => setActiveTab('devtools')}
         >
           SaaS & Dev Tools
         </button>
         <button
           type="button"
-          className={`filter-pill whitespace-nowrap ${activeTab === 'hackernews' ? 'active' : ''}`}
+          className={`filter-pill whitespace-nowrap flex-shrink-0 ${activeTab === 'hackernews' ? 'active' : ''}`}
           onClick={() => setActiveTab('hackernews')}
         >
           Hacker News Top

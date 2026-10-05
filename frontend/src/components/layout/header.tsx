@@ -77,40 +77,45 @@ export function Header() {
   return (
     <header className="site-header">
       <div className="header-container">
-        <Link to="/" className="brand-link" aria-label="StuckSum Home">
-          <img
-            src="/logo.svg"
-            alt="StuckSum"
-            className="brand-logo-img"
-            width="114"
-            height="32"
-          />
+        <Link to="/" className="brand-link" aria-label="StackSum Home">
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <img
+              src="/logo.svg"
+              alt="StackSum Logo"
+              className="brand-logo-img"
+              width="32"
+              height="32"
+            />
+            <span className="font-bold text-[16px] sm:text-[19px] tracking-tight text-[var(--color-text-primary)]">
+              StackSum
+            </span>
+          </div>
         </Link>
 
-        <nav className="nav-links">
+        <nav className="nav-links" aria-label="Main Navigation">
           <Link
             to="/"
             className="nav-link"
             activeProps={{ className: 'nav-link active' }}
           >
-            <span className="hidden xs:inline sm:inline">Calculator</span>
-            <span className="xs:hidden sm:hidden">Stack</span>
+            <span className="hidden sm:inline">Calculator</span>
+            <span className="sm:hidden">Stack</span>
           </Link>
           <Link
             to="/models"
             className="nav-link"
             activeProps={{ className: 'nav-link active' }}
           >
-            <span className="hidden xs:inline sm:inline">AI Models</span>
-            <span className="xs:hidden sm:hidden">Models</span>
+            <span className="hidden sm:inline">AI Models</span>
+            <span className="sm:hidden">Models</span>
           </Link>
           <Link
             to="/news"
             className="nav-link"
             activeProps={{ className: 'nav-link active' }}
           >
-            <span className="hidden xs:inline sm:inline">Tech News</span>
-            <span className="xs:hidden sm:hidden">News</span>
+            <span className="hidden sm:inline">Tech News</span>
+            <span className="sm:hidden">News</span>
           </Link>
           <button
             type="button"
