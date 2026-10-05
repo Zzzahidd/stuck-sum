@@ -1,0 +1,9 @@
+# GitHub Linguist Overrides
+# Exclude agent skills, internal scripts, and datasets from repository language statistics
+.agents/** linguist-vendored
+.agents/** linguist-detectable=false
+.agents/** linguist-documentation
+
+# Explicitly detect TypeScript frontend files
+*.ts linguist-detectable=true
+*.tsx linguist-detectable=true

@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build & output
+dist/
+dist-ssr/
+.output/
+.nitro/
+.tanstack/
+.vercel/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# OS generated files
+.DS_Store
+Thumbs.db
