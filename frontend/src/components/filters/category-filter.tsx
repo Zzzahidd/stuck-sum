@@ -38,7 +38,7 @@ export function CategoryFilter({
       {/* Mobile Horizontal Scrollable List (all categories) */}
       <div
         ref={scrollContainerRef}
-        className="filters-wrapper md:hidden"
+        className="filters-wrapper-mobile"
         role="group"
         aria-label="Filter products by category (mobile)"
       >
@@ -60,7 +60,7 @@ export function CategoryFilter({
 
       {/* Desktop Filter with More Dropdown */}
       <div
-        className="filters-wrapper hidden md:flex"
+        className="filters-wrapper-desktop"
         role="group"
         aria-label="Filter products by category"
       >

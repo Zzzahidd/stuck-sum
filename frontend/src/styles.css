@@ -318,13 +318,41 @@ main {
 }
 
 /* Category Filters */
-.filters-wrapper {
-  position: relative;
+.filters-wrapper-mobile {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding-top: 16px;
-  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px 0;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  flex-wrap: nowrap;
+}
+
+.filters-wrapper-mobile::-webkit-scrollbar {
+  display: none;
+}
+
+.filters-wrapper-desktop {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .filters-wrapper-mobile {
+    display: none !important;
+  }
+  .filters-wrapper-desktop {
+    position: relative;
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    padding-top: 16px;
+    flex-wrap: wrap;
+  }
 }
 
 .filter-pill {
@@ -1065,21 +1093,6 @@ footer {
     padding: 0 8px;
     width: 100%;
     min-width: 0;
-  }
-  .filters-wrapper {
-    gap: 6px;
-    padding: 6px 0;
-    margin: 0;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    flex-wrap: nowrap;
-  }
-  .filters-wrapper::-webkit-scrollbar {
-    display: none;
   }
   .filter-pill {
     height: 36px;
